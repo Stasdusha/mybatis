@@ -1,0 +1,31 @@
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mappers.FabricMapper">
+
+    <resultMap id="fabric" type="com.mybatis.dto.Fabric">
+        <id property="id" column="id_fabric"/>
+        <result property="name" column="name_fabric"/>
+        <collection 
+			property="masters"
+			column="id_fabric" 
+			javaType="List"
+			ofType="Master" 
+			select="com.mybatis.mappers.MasterMapper.getMasterByFabricID" 
+            fetchType="eager" 
+            />
+        <collection 
+			property="adress"
+			column="id_fabric" 
+			javaType="List"
+			ofType="Adress" 
+			select="com.mybatis.mappers.AdressMapper.getAdressbyFabricId" 
+            fetchType="eager" 
+            />
+    </resultMap>
+       
+    <select 
+        id="getFabricById" 
+        parameterType="java.lang.Integer" resultMap="fabric" >
+        SELECT * FROM fabric where id_fabric = #{id}  
+    </select>
+   
+</mapper>

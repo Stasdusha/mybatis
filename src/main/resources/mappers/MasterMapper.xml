@@ -1,0 +1,23 @@
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mappers.MasterMapper">
+
+    <resultMap id="master" type="com.mybatis.dto.Master">
+        <id property="id" column="id_master"/>
+        <result property="name" column="name_master"/>
+        <collection 
+			property="details"
+			column="id_master" 
+			javaType="List"
+			ofType="detail" 
+			select="com.mybatis.mappers.DetailMapper.getDetailbyMasterId" 
+            fetchType="eager" 
+            />
+    </resultMap>
+       
+    <select 
+        id="getMasterByFabricID" 
+        parameterType="java.lang.Integer" resultMap="master" >
+        SELECT * FROM master where id_fabric = #{id}  
+    </select>
+   
+</mapper>

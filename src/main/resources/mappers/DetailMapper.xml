@@ -1,0 +1,14 @@
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mappers.DetailMapper">
+
+    <resultMap id="detail" type="com.mybatis.dto.Detail">
+        <id property="id" column="id_detail"/>
+        <result property="name" column="name_detail"/>
+    </resultMap>
+       
+    <select 
+        id="getDetailbyMasterId" 
+        parameterType="java.lang.Integer" resultMap="detail" >
+        SELECT * FROM detail where ID_MASTER = #{id}  
+    </select>
+</mapper>
